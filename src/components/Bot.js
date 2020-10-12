@@ -6,16 +6,17 @@ class Bot extends Component {
         super(props);
         this.state = {
             close: true,
+            botName: 'Scratchy'
         };
     }
 
     render() {
-        const {close} = this.state;
+        const {close, botName} = this.state;
         return (
             <div>
                 <div className={close ? "chatbot chatbot--closed" : "chatbot"}>
                     <div className={'chatbot__header'}  onClick={() => this.toggle()}>
-                        <p><strong>Got a question?</strong> <span className="u-text-highlight">Ask Harry</span></p>
+                        <p><strong>Got a question?</strong> <span className="u-text-highlight">Ask {botName}</span></p>
                         <svg className="chatbot__close-button icon-speech" viewBox="0 0 32 32">
                             {/*<use xlink:href="#icon-speech"/>*/}
                         </svg>
@@ -32,7 +33,7 @@ class Bot extends Component {
                                     </svg>
                                 </div>
                                 <span className="chatbot__arrow chatbot__arrow--left"></span>
-                                <p className='chatbot__message'>Hi there 🖐. I’m Harry, your virtual assistant. I'm here
+                                <p className='chatbot__message'>Hi there 🖐. I’m {botName}, your virtual assistant. I'm here
                                     to
                                     help with your
                                     general enquiries.</p>
