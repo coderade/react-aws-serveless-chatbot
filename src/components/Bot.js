@@ -6,7 +6,7 @@ class Bot extends Component {
         super(props);
         this.state = {
             close: true,
-            botName: 'Scratchy'
+            botName: 'TomBot'
         };
     }
 
