@@ -2,24 +2,37 @@ import React, {Component} from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPaperPlane} from '@fortawesome/free-solid-svg-icons'
 import avatar from '../images/tom-avatar.png';
+import Message from "./Message";
+
+const BOT_NAME = 'Tom'
+
+const messages = [
+    {
+        author: 'bot',
+        body: `'Hi there 🖐. I’m ${BOT_NAME}, your virtual assistant. I'm here to help with your general enquiries`,
+    }]
 
 class Bot extends Component {
+
 
     constructor(props) {
         super(props);
         this.state = {
             close: true,
-            botName: 'Tom'
+            botName: BOT_NAME,
+            messages: [],
+            value: ''
         };
     }
 
     render() {
-        const {close, botName} = this.state;
+        const {close, botName, messages} = this.state;
         return (
             <div>
                 <div className={close ? "chatbot chatbot--closed" : "chatbot"}>
                     <div className={'chatbot__header'} onClick={() => this.toggle()}>
-                        <p><strong>Do you want know how is weather?</strong> <span className="u-text-highlight">Ask {botName}</span></p>
+                        <p><strong>Do you want know how is weather?</strong> <span
+                            className="u-text-highlight">Ask {botName}</span></p>
                         {/*<FontAwesomeIcon icon="coffee"/>*/}
                         <svg className="chatbot__close-button icon-close" viewBox="0 0 32 32">
                             {/*<use xlink:href="#icon-close"/>*/}
@@ -27,18 +40,14 @@ class Bot extends Component {
                     </div>
                     <div className="chatbot__message-window">
                         <ul className="chatbot__messages">
-                            <li className="is-ai animation">
-                                <div className="is-ai__profile-picture">
-                                    <img src={avatar} alt="Avatar" className="avatar"/>
-                                </div>
-                                <span className="chatbot__arrow chatbot__arrow--left"></span>
-                                <p className='chatbot__message'>Hi there 🖐. I’m {botName}, your virtual assistant. I'm
-                                    here to help with your general enquiries.</p>
-                            </li>
+                            <React.Fragment>
+                                {messages.map((Component, key) => (<Component key={key}/>))}
+                            </React.Fragment>
                         </ul>
                     </div>
                     <div className="chatbot__entry chatbot--closed">
-                        <input type="text" className="chatbot__input" placeholder="Write a message..."/>
+                        <input type="text" className="chatbot__input" value={this.state.value}
+                               onChange={evt => this.updateInputValue(evt)} placeholder="Write a message..."/>
                         <span className={'tabLinks'} onClick={() => this.sendMessage()}>
                             <FontAwesomeIcon icon={faPaperPlane} className="fa-icon"/>
                         </span>
@@ -75,9 +84,46 @@ class Bot extends Component {
         });
     }
 
-    sendMessage() {
-        console.log('lol')
+    addMessage(item) {
+        this.setState({
+            messages: [...this.state.messages, item]
+        });
+
+        setTimeout(() => {
+            const items = document.querySelectorAll('li');
+            const lastItem = items[items.length - 1];
+            // document.querySelector('.chatbot__messages').scrollTop = lastItem.offsetTop + lastItem.style.height;
+        }, 100);
     }
+
+    sendMessage(e) {
+
+        this.addMessage({
+            author: 'human',
+            body: this.state.value
+        });
+
+        // this.mockReply();
+
+        // e.target.reset();
+
+    }
+
+    updateInputValue(evt) {
+        this.setState({
+            value: evt.target.value
+        });
+    }
+
+
+    // sendMessage() {
+    //     const content = 'aws'
+    //     const message = UserMessage
+    //
+    //     this.setState(prevState => ({
+    //         messages: [message, ...prevState.messages]
+    //     }))
+    // }
 }
 
 export default Bot;
