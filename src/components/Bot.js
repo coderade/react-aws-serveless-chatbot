@@ -1,4 +1,7 @@
 import React, {Component} from "react";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faPaperPlane} from '@fortawesome/free-solid-svg-icons'
+import avatar from '../images/tom-avatar.png';
 
 class Bot extends Component {
 
@@ -6,7 +9,7 @@ class Bot extends Component {
         super(props);
         this.state = {
             close: true,
-            botName: 'TomBot'
+            botName: 'Tom'
         };
     }
 
@@ -15,11 +18,9 @@ class Bot extends Component {
         return (
             <div>
                 <div className={close ? "chatbot chatbot--closed" : "chatbot"}>
-                    <div className={'chatbot__header'}  onClick={() => this.toggle()}>
-                        <p><strong>Got a question?</strong> <span className="u-text-highlight">Ask {botName}</span></p>
-                        <svg className="chatbot__close-button icon-speech" viewBox="0 0 32 32">
-                            {/*<use xlink:href="#icon-speech"/>*/}
-                        </svg>
+                    <div className={'chatbot__header'} onClick={() => this.toggle()}>
+                        <p><strong>Do you want know how is weather?</strong> <span className="u-text-highlight">Ask {botName}</span></p>
+                        {/*<FontAwesomeIcon icon="coffee"/>*/}
                         <svg className="chatbot__close-button icon-close" viewBox="0 0 32 32">
                             {/*<use xlink:href="#icon-close"/>*/}
                         </svg>
@@ -28,23 +29,20 @@ class Bot extends Component {
                         <ul className="chatbot__messages">
                             <li className="is-ai animation">
                                 <div className="is-ai__profile-picture">
-                                    <svg className="icon-avatar" viewBox="0 0 32 32">
-                                        {/*<use xlink:href="#avatar"/>*/}
-                                    </svg>
+                                    <img src={avatar} alt="Avatar" className="avatar"/>
                                 </div>
                                 <span className="chatbot__arrow chatbot__arrow--left"></span>
-                                <p className='chatbot__message'>Hi there 🖐. I’m {botName}, your virtual assistant. I'm here
-                                    to
-                                    help with your
-                                    general enquiries.</p>
+                                <p className='chatbot__message'>Hi there 🖐. I’m {botName}, your virtual assistant. I'm
+                                    here to help with your general enquiries.</p>
                             </li>
                         </ul>
                     </div>
                     <div className="chatbot__entry chatbot--closed">
                         <input type="text" className="chatbot__input" placeholder="Write a message..."/>
-                        <svg className="chatbot__submit" viewBox="0 0 32 32">
-                            {/*<use xlink:href="#icon-send"/>*/}
-                        </svg>
+                        <span className={'tabLinks'} onClick={() => this.sendMessage()}>
+                            <FontAwesomeIcon icon={faPaperPlane} className="fa-icon"/>
+                        </span>
+
                     </div>
                 </div>
                 <svg>
@@ -65,16 +63,7 @@ class Bot extends Component {
                         <path d="M0.31,9.43a0.5,0.5,0,0,0,0,.93l8.3,3.23L23.15,0Z"/>
                         <path d="M9,14.6H9V21.4a0.5,0.5,0,0,0,.93.25L13.22,16l6,3.32A0.5,0.5,0,0,0,20,19l4-18.4Z"/>
                     </symbol>
-                    <symbol id="avatar" width="32" height="32" viewBox="0 0 44.25 44">
-                        <title>Avatar</title>
-                        <path style={{'fill': '#7226e0', 'fillRule': 'evenodd'}}
-                              d="M1035.88,1696.25a22,22,0,1,1-22.13,22A22.065,22.065,0,0,1,1035.88,1696.25Z"
-                              transform="translate(-1013.75 -1696.25)"/>
-                        <path style={{'fill': '#fff', 'fillRule': 'evenodd'}}
-                              d="M1030.18,1725.16h2.35a0.335,0.335,0,0,0,.34-0.33v-5.23h5.94v5.23a0.342,0.342,0,0,0,.34.33h2.36a0.342,0.342,0,0,0,.34-0.33v-12.36a0.34,0.34,0,0,0-.34-0.32h-2.36a0.34,0.34,0,0,0-.34.32v4.51h-5.94v-4.51a0.333,0.333,0,0,0-.34-0.32h-2.35a0.333,0.333,0,0,0-.34.32v12.36a0.335,0.335,0,0,0,.34.33"
-                              transform="translate(-1013.75 -1696.25)"/>
-                    </symbol>
-
+                    <img src={avatar} alt="Avatar" className="avatar"/>
                 </svg>
             </div>
         );
@@ -84,6 +73,10 @@ class Bot extends Component {
         this.setState({
             close: !this.state.close,
         });
+    }
+
+    sendMessage() {
+        console.log('lol')
     }
 }
 

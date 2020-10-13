@@ -13,6 +13,9 @@ $chat-padding: 20px;
 $header-height: 54px;
 $entry-height: 60px;
 
+
+//style based on https://codepen.io/Guimauve01/pen/rwVOrV
+
 .chatbot {
   position: fixed;
   top: 0;
@@ -367,4 +370,16 @@ strong {
 .intro {
   display: block;
   margin-bottom: 20px;
+}
+
+
+.tabLinks:hover .fa-icon {
+  color: red;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
