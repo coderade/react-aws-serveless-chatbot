@@ -103,11 +103,13 @@ class Bot extends Component {
     }
 
     sendMessage() {
+        if (this.state.value) {
+            this.addMessage({
+                author: 'human',
+                body: this.state.value
+            });
+        }
 
-        this.addMessage({
-            author: 'human',
-            body: this.state.value
-        });
 
     }
 
