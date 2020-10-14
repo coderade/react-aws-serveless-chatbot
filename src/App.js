@@ -5,7 +5,7 @@ import Bot from "./components/Bot";
 function App() {
     return (
         <div className="App">
-            <Bot></Bot>
+            <Bot/>
         </div>
     );
 
