@@ -31,7 +31,7 @@ class Bot extends Component {
 
     componentDidMount() {
 
-        messages.map((item, index) => {
+        messages.map((item) => {
             setTimeout(() => this.addMessage(item), item.timeout);
         });
 

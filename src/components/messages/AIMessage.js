@@ -1,5 +1,5 @@
 import React from "react";
-import avatar from "../../images/tom-avatar.png";
+import avatar from "../../assets/images/tom-avatar.png";
 
 const AIMessage = props => {
     const {body} = props.data;
