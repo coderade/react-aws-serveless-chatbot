@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPaperPlane, faTimes, faCommentAlt} from '@fortawesome/free-solid-svg-icons'
 import UserMessage from "./messages/UserMessage";
 import AIMessage from "./messages/AIMessage";
+import BotService from "./../services/bot.service";
 
 //https://codepen.io/onefastsnail/pen/JpmdKW
 //https://codepen.io/Guimauve01/pen/rwVOrV
@@ -30,6 +31,11 @@ class Bot extends Component {
     }
 
     componentDidMount() {
+
+        const city = 'DENVER';
+        BotService.getTemperateByCity(city).then(result => {
+            console.log(result)
+        }).catch(err => console.log(err))
 
         messages.map((item) => {
             setTimeout(() => this.addMessage(item), item.timeout);
