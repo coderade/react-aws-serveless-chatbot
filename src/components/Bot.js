@@ -167,13 +167,14 @@ class Bot extends Component {
             body: Loader,
         });
 
-        this.setState(prevState => {
-            const idx = prevState.messages.length - 1;
-            const newItems = [...prevState.messages];
-            newItems[idx].body = message;
-            return {messages: newItems, value: ''};
-        })
-
+        setTimeout(() => {
+            this.setState(prevState => {
+                const idx = prevState.messages.length - 1;
+                const newItems = [...prevState.messages];
+                newItems[idx].body = message;
+                return {messages: newItems, value: ''};
+            })
+        }, 1000)
     }
 
     addCustomizedMessage(temperature) {
@@ -187,10 +188,15 @@ class Bot extends Component {
         } else {
             message = "I think this is far too cold for cats.";
         }
-        this.addMessage({
-            author: 'ai',
-            body: message
-        });
+
+        setTimeout(() => {
+            this.addMessage({
+                author: 'ai',
+                body: message
+            });
+        }, 2000)
+
+
     }
 
 }
