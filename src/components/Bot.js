@@ -1,13 +1,18 @@
-import React, {Component} from "react";
+import React, {useState, Component} from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCommentAlt, faPaperPlane, faTimes} from '@fortawesome/free-solid-svg-icons'
 import UserMessage from "./messages/UserMessage";
 import AIMessage from "./messages/AIMessage";
 import BotService from "./../services/bot.service";
 import Loader from "./Loader";
+import AudioButton from "./AudioButton";
+import {useSpeechRecognition} from "react-speech-recognition";
+
 const $document = document
 
+
 const BOT_NAME = 'Tom'
+
 
 const messages = [
     {
@@ -26,6 +31,7 @@ const messages = [
 ];
 
 class Bot extends Component {
+
 
     constructor(props) {
         super(props);
@@ -51,6 +57,7 @@ class Bot extends Component {
     }
 
     render() {
+
         const {close, botName, messages} = this.state;
         return (
             <div>
@@ -80,13 +87,15 @@ class Bot extends Component {
                             })}
                         </ul>
                     </div>
-                    <div className="chatbot__entry chatbot--closed" >
+                    <div className="chatbot__entry chatbot--closed">
                         <input type="text" className="chatbot__input" value={this.state.value}
                                onChange={evt => this.updateInputValue(evt)} placeholder="Write a message..."/>
-                        <span className={'tabLinks'} onClick={() => this.sendMessage()} >
+                        <span className={'tabLinks'} onClick={() => this.sendMessage()}>
                             <FontAwesomeIcon icon={faPaperPlane} className="fa-icon"/>
                         </span>
-
+                        <span className={'tabLinks'}>
+                            <AudioButton setState={(data) => this.setNotes(data)}/>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -96,6 +105,12 @@ class Bot extends Component {
     toggle() {
         this.setState({
             close: !this.state.close,
+        });
+    }
+
+    setNotes(data) {
+        this.setState({
+            value: data
         });
     }
 
