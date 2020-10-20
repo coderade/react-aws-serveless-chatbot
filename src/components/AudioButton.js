@@ -4,7 +4,6 @@ import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition'
 const Dictaphone = ({setState}) => {
     const {transcript, listening} = useSpeechRecognition();
 
-
     //Update state with speech -> text transcript
     useEffect(() => {
         if (transcript) {
