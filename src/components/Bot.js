@@ -18,12 +18,6 @@ const defaultMessages = [
         for you to walk with your cat..`,
         loading: true,
         timeout: 800
-    },
-    {
-        author: 'ai',
-        body: `Which city do you want to know about the weather?`,
-        timeout: 2000,
-        loading: true,
     }
 ];
 
@@ -35,7 +29,9 @@ const Bot = ({setState}) => {
 
     const addMessage = useCallback((item) => {
 
-        setMessages(oldArray => [...oldArray, item]);
+        setMessages(oldArray => {
+            return [...oldArray, item]
+        });
 
         setTimeout(() => {
             const items = document.querySelectorAll('li');
@@ -50,7 +46,9 @@ const Bot = ({setState}) => {
 
     useEffect(() => {
         defaultMessages.map((item) => setTimeout(() => addMessage(item), item.timeout));
-    }, [setState, addMessage]);
+    }, [addMessage]);
+
+    // useEffect(setMessages, []);
 
     const toggle = () => {
         setCloseState(oldArray => !oldArray);
@@ -65,7 +63,8 @@ const Bot = ({setState}) => {
 
     const sendMessage = () => {
 
-        if(listening){
+
+        if (listening) {
             SpeechRecognition.stopListening()
         }
 
@@ -76,19 +75,11 @@ const Bot = ({setState}) => {
                 body: value
             });
 
-            const city = value;
             let message;
-            BotService.getTemperateByCity(city)
+            BotService.sendMessageToBot(value)
                 .then(result => {
-                    if (result.data.valid) {
-                        message = `The weather in ${value} is ${result.data.temperature}°F`;
-                        addAIMessage(message);
-                        addCustomizedMessage(result.data.temperature)
-                    } else {
-                        message = 'This city is invalid, please try another one.'
-                        addAIMessage(message)
-                    }
-
+                    const body = JSON.parse(result.data.body);
+                    formatLexResult(body)
                 }).catch(err => {
 
                 message = `My apologies, I'm not avail at the moment, however, feel free to call to Jerry directly 0123456789.`
@@ -107,6 +98,8 @@ const Bot = ({setState}) => {
     }
 
     const addAIMessage = (message) => {
+
+
         addMessage({
             loading: true,
             author: 'ai',
@@ -114,33 +107,46 @@ const Bot = ({setState}) => {
         });
 
         setTimeout(() => {
-            setState(prevState => {
-                const idx = prevState.messages.length - 1;
-                const newItems = [...prevState.messages];
-                newItems[idx].body = message;
-                return {messages: newItems, value: ''};
-            })
+
+
+            setMessages(oldArray => {
+                let carsCopy = [...oldArray];
+                carsCopy[carsCopy.length - 1].body = message;
+                return carsCopy;
+            });
+
         }, 1000)
     }
 
-    const addCustomizedMessage = (temperature) => {
-        let message;
+    const addCustomizedMessage = (sessionAttributes) => {
+        const city = sessionAttributes.city_str;
+        const temperature = Number(sessionAttributes.temp_str)
+        let message = `The temperature in ${city} is ${temperature}°F. `
         if (temperature > 72) {
-            message = "I think this is too hot for cats.";
+            message += "I think this is too hot for cats.";
         } else if (temperature <= 72 && temperature > 50) {
-            message = "I think this is probably just right for your cat.";
+            message += "I think this is probably just right for your cat.";
         } else if (temperature <= 50 && temperature >= 30) {
-            message = "I think this maybe a bit cold for your cat.";
+            message += "I think this maybe a bit cold for your cat.";
         } else {
-            message = "I think this is far too cold for cats.";
+            message += "I think this is far too cold for cats.";
         }
 
+
         setTimeout(() => {
-            addMessage({
-                author: 'ai',
-                body: message
-            });
+            addAIMessage(message);
         }, 2000)
+    }
+
+    const formatLexResult = (body) => {
+
+        if (body.dialogState !== 'Fulfilled') {
+            addAIMessage(body.message);
+        } else {
+            const message = `Ok, so you want to know if your cat can go outside today in ${value}. Let me check... one sec`
+            addAIMessage(message);
+            addCustomizedMessage(body.sessionAttributes)
+        }
     }
 
     return (
