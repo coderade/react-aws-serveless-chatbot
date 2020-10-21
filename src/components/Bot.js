@@ -6,6 +6,7 @@ import AIMessage from "./messages/AIMessage";
 import BotService from "./../services/bot.service";
 import Loader from "./Loader";
 import AudioButton from "./AudioButton";
+import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition'
 
 const $document = document
 const BOT_NAME = 'Tom'
@@ -30,6 +31,7 @@ const Bot = ({setState}) => {
     const [messages, setMessages] = useState([]);
     const [close, setCloseState] = useState(false);
     const [value, setInputValue] = useState('')
+    const {listening} = useSpeechRecognition();
 
     const addMessage = useCallback((item) => {
 
@@ -47,9 +49,7 @@ const Bot = ({setState}) => {
     }, [setMessages])
 
     useEffect(() => {
-        defaultMessages.map((item) => {
-            setTimeout(() => addMessage(item), item.timeout);
-        });
+        defaultMessages.map((item) => setTimeout(() => addMessage(item), item.timeout));
     }, [setState, addMessage]);
 
     const toggle = () => {
@@ -64,6 +64,10 @@ const Bot = ({setState}) => {
     }
 
     const sendMessage = () => {
+
+        if(listening){
+            SpeechRecognition.stopListening()
+        }
 
         if (value) {
 
@@ -168,14 +172,15 @@ const Bot = ({setState}) => {
                     </ul>
                 </div>
                 <div className="chatbot__entry chatbot--closed">
+                    <span className={'tabLinks'}>
+                            <AudioButton value={value} setState={setInputValue}/>
+                        </span>
                     <input type="text" className="chatbot__input" value={value}
                            onChange={evt => updateInputValue(evt)} placeholder="Write a message..."/>
                     <span className={'tabLinks'} onClick={() => sendMessage()}>
                             <FontAwesomeIcon icon={faPaperPlane} className="fa-icon"/>
                         </span>
-                    <span className={'tabLinks'}>
-                            <AudioButton value={value} setState={setInputValue}/>
-                        </span>
+
                 </div>
             </div>
         </div>

@@ -1,7 +1,9 @@
 import React, {useEffect} from "react";
 import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMicrophone} from "@fortawesome/free-solid-svg-icons";
 
-const Dictaphone = ({setState}) => {
+const AudioButton = ({setState}) => {
     const {transcript, listening} = useSpeechRecognition();
 
     //Update state with speech -> text transcript
@@ -14,21 +16,14 @@ const Dictaphone = ({setState}) => {
     return (
         <div className="mic">
             {!listening ? (
-                <button
-                    onClick={() =>
-                        SpeechRecognition.startListening({continuous: true})
-                    }>
-                    Speak
-                </button>
+                <FontAwesomeIcon icon={faMicrophone} className="fa-icon"
+                                 onClick={() => SpeechRecognition.startListening({continuous: true})}/>
             ) : (
-                <button
-                    className="listening"
-                    onClick={SpeechRecognition.stopListening}>
-                    Stop
-                </button>
+                <FontAwesomeIcon icon={faMicrophone} className="microphone-playing fa-icon"
+                                 onClick={SpeechRecognition.stopListening}/>
             )}
         </div>
     )
 
 }
-export default Dictaphone
+export default AudioButton
