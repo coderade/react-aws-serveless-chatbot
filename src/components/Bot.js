@@ -21,7 +21,7 @@ const defaultMessages = [
     }
 ];
 
-const Bot = ({setState}) => {
+const Bot = () => {
     const [messages, setMessages] = useState([]);
     const [close, setCloseState] = useState(false);
     const [value, setInputValue] = useState('')
@@ -48,7 +48,6 @@ const Bot = ({setState}) => {
         defaultMessages.map((item) => setTimeout(() => addMessage(item), item.timeout));
     }, [addMessage]);
 
-    // useEffect(setMessages, []);
 
     const toggle = () => {
         setCloseState(oldArray => !oldArray);
@@ -110,9 +109,9 @@ const Bot = ({setState}) => {
 
 
             setMessages(oldArray => {
-                let carsCopy = [...oldArray];
-                carsCopy[carsCopy.length - 1].body = message;
-                return carsCopy;
+                let messagesClone = [...oldArray];
+                messagesClone[messagesClone.length - 1].body = message;
+                return messagesClone;
             });
 
         }, 1000)
