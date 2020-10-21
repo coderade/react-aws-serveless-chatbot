@@ -4,5 +4,5 @@ Chatbot application developed using React, and the AWS Serverless services Lambd
 and other for didactic purposes on AWS Serverless training 
 course [AWS: Building Serverless Applications](https://www.coursera.org/learn/aws-fundamentals-building-serverless-applications)
 
-![](docs/images/architecture.png)
+![](docs/images/architecture.png)<br/>
 <sub>**Simple architecture diagram**</sub>
