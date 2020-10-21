@@ -29,8 +29,8 @@ const Bot = () => {
 
     const addMessage = useCallback((item) => {
 
-        setMessages(oldArray => {
-            return [...oldArray, item]
+        setMessages(oldMessagesList => {
+            return [...oldMessagesList, item]
         });
 
         setTimeout(() => {
@@ -48,9 +48,8 @@ const Bot = () => {
         defaultMessages.map((item) => setTimeout(() => addMessage(item), item.timeout));
     }, [addMessage]);
 
-
     const toggle = () => {
-        setCloseState(oldArray => !oldArray);
+        setCloseState(oldValue => !oldValue);
     }
 
     const scrollDown = () => {
@@ -74,14 +73,15 @@ const Bot = () => {
                 body: value
             });
 
-            let message;
+
             BotService.sendMessageToBot(value)
                 .then(result => {
                     const body = JSON.parse(result.data.body);
                     formatLexResult(body)
                 }).catch(err => {
 
-                message = `My apologies, I'm not avail at the moment, however, feel free to call to Jerry directly 0123456789.`
+                const message = `My apologies, I'm not avail at the moment, however, feel free to call to Jerry 
+                directly 0123456789.`
 
                 addMessage({
                     author: 'ai',
@@ -106,7 +106,6 @@ const Bot = () => {
         });
 
         setTimeout(() => {
-
 
             setMessages(oldArray => {
                 let messagesClone = [...oldArray];
