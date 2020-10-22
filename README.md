@@ -4,7 +4,7 @@ Chatbot application developed using React, and the AWS Serverless services Lambd
 and others services for didactic purposes on AWS Serverless training 
 course [AWS: Building Serverless Applications](https://www.coursera.org/learn/aws-fundamentals-building-serverless-applications)
 
-In this bot application, the user can send text or audio messages to communicate with the bot to ask about the weather in
+In this bot application, the user can send text or audio messages (using speech recognition) to communicate with the bot to ask about the weather in
 some USA cities. to check which cities are available please check the [cities.csv](aws/dynamodb/cities.csv) file. 
 The Dynamo database has been seeded by this file.
 
