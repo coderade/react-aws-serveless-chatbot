@@ -1,8 +1,16 @@
 # react-aws-chatbot-app
 
-Chatbot application developed using React, and the AWS Serverless services Lambda, Api Gateway, Lex, S3, DynamoDB, 
-and other for didactic purposes on AWS Serverless training 
+Chatbot application developed using React, and the AWS Serverless services Lambda, API Gateway, Lex, S3, DynamoDB, 
+and others services for didactic purposes on AWS Serverless training 
 course [AWS: Building Serverless Applications](https://www.coursera.org/learn/aws-fundamentals-building-serverless-applications)
+
+In this bot application, the user can send text or audio messages to communicate with the bot to ask about the weather in
+some USA cities. to check which cities are available please check the [cities.csv](aws/dynamodb/cities.csv) file. 
+The Dynamo database has been seeded by this file.
+
+### AWS Services
+
+
 
 ![](docs/images/architecture.png)<br/>
 <sub>**Simple architecture diagram**</sub>
@@ -25,7 +33,7 @@ After this, you can run the application.
 
 You can use the Npm to serve this application.
 
-To do this on the root of the project use the `npm start` command.
+To do this on the root of the project, use the `npm start` command.
 
 Then navigate your browser to http://localhost:3000 to see the app running in your browser.
 
