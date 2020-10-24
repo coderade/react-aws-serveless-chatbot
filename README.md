@@ -56,7 +56,7 @@ To import the OpenApi template and create an API, run:
     aws apigateway import-rest-api --body 'file://CatWeather-prod-oas30-apigateway.yaml'
 
 
-### DynamoDB
+#### DynamoDB
 
 The NoSQL database service used on this project. To know more about DynamoDb, please check the following page:
 [Getting Started with Amazon DynamoDB](https://aws.amazon.com/dynamodb/getting-started/)
