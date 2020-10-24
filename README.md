@@ -12,7 +12,7 @@ The Dynamo database has been seeded by this file.
 Some AWS services are used on this project, most of them to test a fully serverless application running on AWS.
 
 To run the following commands, the AWS CLI need to be installed, to learn how to install and use the CLI please check
-the official AWS documentation: [AWS CLI User guid](https://docs.aws.amazon.com/cli/index.html)
+the official AWS documentation: [AWS CLI User Guide](https://docs.aws.amazon.com/cli/index.html)
 
 ![](docs/images/architecture.png)<br/>
 <sub>**Simple architecture diagram**</sub>
