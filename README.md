@@ -7,6 +7,12 @@ In this bot application, the user can send text or audio messages (using speech 
 some USA cities. to check which cities are available please check the [cities.csv](aws/dynamodb/cities.csv) file. 
 The Dynamo database has been seeded by this file.
 
+--                   |  --
+:-------------------------:|:-------------------------:
+![](docs/images/tombot-1.png)| ![](docs/images/tombot-2.png)
+![](docs/images/tombot-3.png)| ![](docs/images/tombot-4.png)
+
+
 ### AWS Services
 
 Some AWS services are used on this project, most of them to test a fully serverless application running on AWS.
@@ -123,11 +129,6 @@ You can use the Npm to serve this application.
 To do this on the root of the project, use the `npm start` command.
 
 Then navigate your browser to http://localhost:3000 to see the app running in your browser.
-
---                   |  --
-:-------------------------:|:-------------------------:
-![](docs/images/tombot-1.png)| ![](docs/images/tombot-2.png)
-![](docs/images/tombot-3.png)| ![](docs/images/tombot-4.png)
 
 
 #### Building application
